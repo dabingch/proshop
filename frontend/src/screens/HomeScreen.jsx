@@ -1,5 +1,7 @@
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 import { useFetchProductsQuery } from '../store'
 // import { useGetProductsQuery } from '../store/slices/productsApiSlice'
 
@@ -8,9 +10,13 @@ const HomeScreen = () => {
 
 	let content
 	if (isLoading) {
-		content = <h2>Loading...</h2>
+		content = <Loader />
 	} else if (error) {
-		content = <div>{error?.data?.message || error.error}</div>
+		content = (
+			<Message variant='danger'>
+				{error?.data?.message || error.error}
+			</Message>
+		)
 	} else {
 		content = (
 			<>

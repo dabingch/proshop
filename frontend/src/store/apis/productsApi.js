@@ -16,9 +16,18 @@ const productsApi = createApi({
 				},
 				keepUnusedDataFor: 5,
 			}),
+			fetchProductDetails: builder.query({
+				query: (productId) => {
+					return {
+						url: `${PRODUCTS_URL}/${productId}`,
+					}
+				},
+				keepUnusedDataFor: 5,
+			}),
 		}
 	},
 })
 
-export const { useFetchProductsQuery } = productsApi
+export const { useFetchProductsQuery, useFetchProductDetailsQuery } =
+	productsApi
 export { productsApi }
