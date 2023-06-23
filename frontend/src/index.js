@@ -12,11 +12,13 @@ import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import ErrorScreen from './screens/ErrorScreen'
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <App />,
+		errorElement: <ErrorScreen />,
 		children: [
 			{ path: '/', element: <HomeScreen /> },
 			{ path: '/product/:id', element: <ProductScreen /> },
