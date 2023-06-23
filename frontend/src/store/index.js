@@ -27,4 +27,8 @@ export {
 	useFetchProductsQuery,
 	useFetchProductDetailsQuery,
 } from './apis/productsApi'
-export { useLoginMutation, useLogoutMutation } from './apis/usersApi'
+export {
+	useRegisterMutation,
+	useLoginMutation,
+	useLogoutMutation,
+} from './apis/usersApi'

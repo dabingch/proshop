@@ -6,6 +6,15 @@ const usersApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
 	endpoints(builder) {
 		return {
+			register: builder.mutation({
+				query: (data) => {
+					return {
+						url: `${USERS_URL}`,
+						method: 'POST',
+						body: data,
+					}
+				},
+			}),
 			login: builder.mutation({
 				query: (data) => {
 					return {
@@ -27,5 +36,6 @@ const usersApi = createApi({
 	},
 })
 
-export const { useLoginMutation, useLogoutMutation } = usersApi
+export const { useRegisterMutation, useLoginMutation, useLogoutMutation } =
+	usersApi
 export { usersApi }
