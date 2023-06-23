@@ -3,7 +3,6 @@ import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { useFetchProductsQuery } from '../store'
-// import { useGetProductsQuery } from '../store/slices/productsApiSlice'
 
 const HomeScreen = () => {
 	const { data: products, isLoading, error } = useFetchProductsQuery()
@@ -20,7 +19,7 @@ const HomeScreen = () => {
 	} else {
 		content = (
 			<>
-				<h1>Latest Products</h1>
+				<h2>Latest Products</h2>
 				<Row>
 					{products.map((product) => {
 						return (
