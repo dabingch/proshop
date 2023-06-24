@@ -1,16 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
-// import { apiSlice } from './slices/apiSlice'
 import {
 	cartReducer,
 	addToCart,
 	removeFromCart,
 	saveShippingAddress,
 	savePaymentMethod,
+	clearCartItems,
 } from './slices/cartSlice'
 import { authReducer, setCredentials, logout } from './slices/authSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { productsApi } from './apis/productsApi'
 import { usersApi } from './apis/usersApi'
+import { ordersApi } from './apis/ordersApi'
 
 export const store = configureStore({
 	reducer: {
@@ -22,7 +23,8 @@ export const store = configureStore({
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()
 			.concat(productsApi.middleware)
-			.concat(usersApi.middleware),
+			.concat(usersApi.middleware)
+			.concat(ordersApi.middleware),
 })
 
 setupListeners(store.dispatch)
@@ -32,10 +34,10 @@ export {
 	removeFromCart,
 	saveShippingAddress,
 	savePaymentMethod,
+	clearCartItems,
 	setCredentials,
 	logout,
 }
-// export { useGetProductsQuery } from './slices/productsApiSlice'
 export {
 	useFetchProductsQuery,
 	useFetchProductDetailsQuery,
@@ -45,3 +47,4 @@ export {
 	useLoginMutation,
 	useLogoutMutation,
 } from './apis/usersApi'
+export { useCreateOrderMutation } from './apis/ordersApi'
