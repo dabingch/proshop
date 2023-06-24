@@ -19,7 +19,7 @@ const HomeScreen = () => {
 	} else {
 		content = (
 			<>
-				<h2>Latest Products</h2>
+				<h1>Latest Products</h1>
 				<Row>
 					{products.map((product) => {
 						return (
