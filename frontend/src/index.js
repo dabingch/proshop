@@ -12,6 +12,8 @@ import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import ShippingScreen from './screens/ShippingScreen'
+import PrivateRoute from './components/PrivateRoute'
 import ErrorScreen from './screens/ErrorScreen'
 
 const router = createBrowserRouter([
@@ -33,6 +35,16 @@ const router = createBrowserRouter([
 			{
 				path: '/register',
 				element: <RegisterScreen />,
+			},
+			{
+				path: '',
+				element: <PrivateRoute />,
+				children: [
+					{
+						path: '/shipping',
+						element: <ShippingScreen />,
+					},
+				],
 			},
 		],
 	},

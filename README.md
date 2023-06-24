@@ -13,3 +13,4 @@
 -   Toastify
 -   React-boostrap
 -   Redirect
+-   Private route (shipping -> login)

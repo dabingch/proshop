@@ -1,6 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 // import { apiSlice } from './slices/apiSlice'
-import { cartReducer, addToCart, removeFromCart } from './slices/cartSlice'
+import {
+	cartReducer,
+	addToCart,
+	removeFromCart,
+	saveShippingAddress,
+} from './slices/cartSlice'
 import { authReducer, setCredentials, logout } from './slices/authSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { productsApi } from './apis/productsApi'
@@ -21,7 +26,13 @@ export const store = configureStore({
 
 setupListeners(store.dispatch)
 
-export { addToCart, removeFromCart, setCredentials, logout }
+export {
+	addToCart,
+	removeFromCart,
+	saveShippingAddress,
+	setCredentials,
+	logout,
+}
 // export { useGetProductsQuery } from './slices/productsApiSlice'
 export {
 	useFetchProductsQuery,
