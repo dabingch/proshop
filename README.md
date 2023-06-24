@@ -11,6 +11,6 @@
 -   React-Redux
 -   React-router-dom
 -   Toastify
--   React-boostrap
+-   React-bootstrap
 -   Redirect
 -   Private route (shipping -> login)

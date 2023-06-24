@@ -13,7 +13,7 @@ const generateToken = (userId, res) => {
 		// * A cookie with the Secure attribute is only sent to the server with an encrypted request over the HTTPS protocol
 		// * Prevents MitM attacks
 		secure: process.env.NODE_ENV === 'production',
-		sameSite: 'strict',
+		sameSite: 'strict', // * Prevents CSRF attacks
 		maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
 	})
 }
