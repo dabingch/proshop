@@ -5,6 +5,7 @@ import {
 	addToCart,
 	removeFromCart,
 	saveShippingAddress,
+	savePaymentMethod,
 } from './slices/cartSlice'
 import { authReducer, setCredentials, logout } from './slices/authSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
@@ -30,6 +31,7 @@ export {
 	addToCart,
 	removeFromCart,
 	saveShippingAddress,
+	savePaymentMethod,
 	setCredentials,
 	logout,
 }
