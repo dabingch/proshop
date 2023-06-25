@@ -26,17 +26,16 @@ const ProductScreen = () => {
 		navigate('/cart')
 	}
 
-	let content
 	if (isLoading) {
-		content = <Loader />
+		return <Loader />
 	} else if (error) {
-		content = (
+		return (
 			<Message variant='danger'>
 				{error?.data?.message || error.error}
 			</Message>
 		)
 	} else {
-		content = (
+		return (
 			<>
 				<Link className='btn btn-light my-3' to='/'>
 					Go Back
@@ -133,8 +132,6 @@ const ProductScreen = () => {
 			</>
 		)
 	}
-
-	return <>{content}</>
 }
 
 export default ProductScreen

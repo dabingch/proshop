@@ -7,17 +7,16 @@ import { useFetchProductsQuery } from '../store'
 const HomeScreen = () => {
 	const { data: products, isLoading, error } = useFetchProductsQuery()
 
-	let content
 	if (isLoading) {
-		content = <Loader />
+		return <Loader />
 	} else if (error) {
-		content = (
+		return (
 			<Message variant='danger'>
 				{error?.data?.message || error.error}
 			</Message>
 		)
 	} else {
-		content = (
+		return (
 			<>
 				<h1>Latest Products</h1>
 				<Row>
@@ -32,8 +31,6 @@ const HomeScreen = () => {
 			</>
 		)
 	}
-
-	return <>{content}</>
 }
 
 export default HomeScreen
