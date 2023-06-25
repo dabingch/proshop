@@ -19,6 +19,7 @@ export const store = configureStore({
 		auth: authReducer,
 		[productsApi.reducerPath]: productsApi.reducer,
 		[usersApi.reducerPath]: usersApi.reducer,
+		[ordersApi.reducerPath]: ordersApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()
@@ -47,4 +48,7 @@ export {
 	useLoginMutation,
 	useLogoutMutation,
 } from './apis/usersApi'
-export { useCreateOrderMutation } from './apis/ordersApi'
+export {
+	useCreateOrderMutation,
+	useGetOrderDetailsQuery,
+} from './apis/ordersApi'
