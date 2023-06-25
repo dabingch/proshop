@@ -15,3 +15,7 @@
 -   React-bootstrap
 -   Redirect
 -   Private route (shipping -> login)
+
+### Remaining
+
+-   Update qty after placing or canceling an order

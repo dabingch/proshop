@@ -20,6 +20,7 @@ const OrderScreen = () => {
 
 	const { userInfo } = useSelector((state) => state.auth)
 
+	// * Just a mock payment handler
 	const handlePayOrder = async () => {
 		const details = {
 			id: Math.floor(Math.random() * 1000000000),

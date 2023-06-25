@@ -47,6 +47,7 @@ export {
 	useRegisterMutation,
 	useLoginMutation,
 	useLogoutMutation,
+	useProfileMutation,
 } from './apis/usersApi'
 export {
 	useCreateOrderMutation,
