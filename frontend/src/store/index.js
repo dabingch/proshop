@@ -53,4 +53,5 @@ export {
 	useCreateOrderMutation,
 	useGetOrderDetailsQuery,
 	usePayOrderMutation,
+	useGetMyOrdersQuery,
 } from './apis/ordersApi'

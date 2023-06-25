@@ -33,6 +33,15 @@ const ordersApi = createApi({
 					}
 				},
 			}),
+			getMyOrders: builder.query({
+				query: () => {
+					return {
+						url: `${ORDERS_URL}/mine`,
+						method: 'GET',
+					}
+				},
+				keepUnusedDataFor: 5,
+			}),
 		}
 	},
 })
@@ -41,5 +50,6 @@ export const {
 	useCreateOrderMutation,
 	useGetOrderDetailsQuery,
 	usePayOrderMutation,
+	useGetMyOrdersQuery,
 } = ordersApi
 export { ordersApi }
