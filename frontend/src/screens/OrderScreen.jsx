@@ -1,9 +1,10 @@
-import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { useGetOrderDetailsQuery } from '../store'
+import { toast } from 'react-toastify'
+import { useGetOrderDetailsQuery, usePayOrderMutation } from '../store'
 
 const OrderScreen = () => {
 	const { id: orderId } = useParams()
@@ -14,6 +15,28 @@ const OrderScreen = () => {
 		isLoading,
 		error,
 	} = useGetOrderDetailsQuery(orderId)
+
+	const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation()
+
+	const { userInfo } = useSelector((state) => state.auth)
+
+	const handlePayOrder = async () => {
+		const details = {
+			id: Math.floor(Math.random() * 1000000000),
+			status: 'COMPLETED',
+			update_time: Date.now(),
+			payer: {
+				email_address: userInfo.email,
+			},
+		}
+		try {
+			await payOrder({ orderId, details })
+			refetch()
+			toast.success('Payment successful')
+		} catch (err) {
+			toast.error(err?.data?.message || err.error)
+		}
+	}
 
 	if (isLoading) {
 		return <Loader />
@@ -136,6 +159,25 @@ const OrderScreen = () => {
 										<Col>${order.totalPrice}</Col>
 									</Row>
 								</ListGroup.Item>
+
+								{!order.isPaid && (
+									<ListGroup.Item>
+										{loadingPay ? (
+											<Loader />
+										) : (
+											<div>
+												<Button
+													onClick={handlePayOrder}
+													style={{
+														marginBottom: '10px',
+													}}
+												>
+													Pay Order
+												</Button>
+											</div>
+										)}
+									</ListGroup.Item>
+								)}
 							</ListGroup>
 						</Card>
 					</Col>
