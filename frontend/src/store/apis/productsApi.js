@@ -33,6 +33,16 @@ const productsApi = createApi({
 					}
 				},
 			}),
+			updateProduct: builder.mutation({
+				invalidatesTags: ['Product'],
+				query: (data) => {
+					return {
+						url: `${PRODUCTS_URL}/${data.productId}`,
+						method: 'PUT',
+						body: data,
+					}
+				},
+			}),
 		}
 	},
 })
@@ -41,5 +51,6 @@ export const {
 	useFetchProductsQuery,
 	useFetchProductDetailsQuery,
 	useCreateProductMutation,
+	useUpdateProductMutation,
 } = productsApi
 export { productsApi }

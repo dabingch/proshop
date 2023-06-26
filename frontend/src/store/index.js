@@ -43,6 +43,7 @@ export {
 	useFetchProductsQuery,
 	useFetchProductDetailsQuery,
 	useCreateProductMutation,
+	useUpdateProductMutation,
 } from './apis/productsApi'
 export {
 	useRegisterMutation,

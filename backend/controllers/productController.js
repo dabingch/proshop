@@ -36,14 +36,33 @@ const createProduct = asyncHandler(async (req, res) => {
 		description: 'Sample description',
 	})
 
-	try {
-		const createdProduct = await product.save()
+	const createdProduct = await product.save()
 
-		res.status(201).json(createdProduct)
-	} catch (error) {
-		res.status(400)
-		throw new Error('Invalid product data')
-	}
+	res.status(201).json(createdProduct)
 })
 
-export { getProducts, getProductById, createProduct }
+const updateProduct = asyncHandler(async (req, res) => {
+	const { name, price, description, image, brand, category, countInStock } =
+		req.body
+
+	const product = await Product.findById(req.params.id)
+
+	if (!product) {
+		res.status(404)
+		throw new Error('Product not found')
+	}
+
+	product.name = name
+	product.price = price
+	product.description = description
+	product.image = image
+	product.brand = brand
+	product.category = category
+	product.countInStock = countInStock
+
+	const updatedProduct = await product.save()
+
+	res.status(200).json(updatedProduct)
+})
+
+export { getProducts, getProductById, createProduct, updateProduct }
