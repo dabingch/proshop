@@ -3,10 +3,25 @@ import { FaEdit } from 'react-icons/fa'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import ProductList from '../../components/ProductList'
-import { useFetchProductsQuery } from '../../store'
+import { toast } from 'react-toastify'
+import { useFetchProductsQuery, useCreateProductMutation } from '../../store'
 
 const ProductListScreen = () => {
 	const { data: products, isLoading, error } = useFetchProductsQuery()
+
+	const [createProduct, { isLoading: loadingCreate }] =
+		useCreateProductMutation()
+
+	const handleCreateProduct = async () => {
+		if (window.confirm('Are you sure you want to create a new product?')) {
+			try {
+				await createProduct()
+				toast.success('Product created successfully')
+			} catch (err) {
+				toast.error(err?.data?.message || err.error)
+			}
+		}
+	}
 
 	return (
 		<>
@@ -15,11 +30,17 @@ const ProductListScreen = () => {
 					<h1>Products</h1>
 				</Col>
 				<Col className='text-end'>
-					<Button className='btn-sm m-3'>
+					<Button
+						className='btn-sm m-3'
+						onClick={handleCreateProduct}
+						disabled={loadingCreate}
+					>
 						<FaEdit /> Create Product
 					</Button>
 				</Col>
 			</Row>
+
+			{loadingCreate && <Loader />}
 
 			{isLoading ? (
 				<Loader />

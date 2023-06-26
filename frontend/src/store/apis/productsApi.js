@@ -7,6 +7,7 @@ const productsApi = createApi({
 	endpoints(builder) {
 		return {
 			fetchProducts: builder.query({
+				providesTags: ['Product'],
 				query: () => {
 					return {
 						url: PRODUCTS_URL,
@@ -23,10 +24,22 @@ const productsApi = createApi({
 				},
 				keepUnusedDataFor: 5,
 			}),
+			createProduct: builder.mutation({
+				invalidatesTags: ['Product'],
+				query: () => {
+					return {
+						url: PRODUCTS_URL,
+						method: 'POST',
+					}
+				},
+			}),
 		}
 	},
 })
 
-export const { useFetchProductsQuery, useFetchProductDetailsQuery } =
-	productsApi
+export const {
+	useFetchProductsQuery,
+	useFetchProductDetailsQuery,
+	useCreateProductMutation,
+} = productsApi
 export { productsApi }
