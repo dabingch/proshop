@@ -51,6 +51,14 @@ const ordersApi = createApi({
 				},
 				keepUnusedDataFor: 5,
 			}),
+			deliverOrder: builder.mutation({
+				query: (orderId) => {
+					return {
+						url: `${ORDERS_URL}/${orderId}/deliver`,
+						method: 'PUT',
+					}
+				},
+			}),
 		}
 	},
 })
@@ -61,5 +69,6 @@ export const {
 	usePayOrderMutation,
 	useGetMyOrdersQuery,
 	useGetOrdersQuery,
+	useDeliverOrderMutation,
 } = ordersApi
 export { ordersApi }

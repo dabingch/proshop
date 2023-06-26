@@ -4,7 +4,11 @@ import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { toast } from 'react-toastify'
-import { useGetOrderDetailsQuery, usePayOrderMutation } from '../store'
+import {
+	useGetOrderDetailsQuery,
+	usePayOrderMutation,
+	useDeliverOrderMutation,
+} from '../store'
 
 const OrderScreen = () => {
 	const { id: orderId } = useParams()
@@ -17,6 +21,9 @@ const OrderScreen = () => {
 	} = useGetOrderDetailsQuery(orderId)
 
 	const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation()
+
+	const [deliverOrder, { isLoading: loadingDeliver }] =
+		useDeliverOrderMutation()
 
 	const { userInfo } = useSelector((state) => state.auth)
 
@@ -34,6 +41,16 @@ const OrderScreen = () => {
 			await payOrder({ orderId, details })
 			refetch()
 			toast.success('Payment successful')
+		} catch (err) {
+			toast.error(err?.data?.message || err.error)
+		}
+	}
+
+	const handleDeliver = async () => {
+		try {
+			await deliverOrder(orderId)
+			refetch()
+			toast.success('Order delivered')
 		} catch (err) {
 			toast.error(err?.data?.message || err.error)
 		}
@@ -179,6 +196,20 @@ const OrderScreen = () => {
 										)}
 									</ListGroup.Item>
 								)}
+
+								{loadingDeliver && <Loader />}
+								{userInfo.isAdmin &&
+									order.isPaid &&
+									!order.isDelivered && (
+										<ListGroup.Item>
+											<Button
+												onClick={handleDeliver}
+												className='btn btn-block'
+											>
+												Mark As Delivered
+											</Button>
+										</ListGroup.Item>
+									)}
 							</ListGroup>
 						</Card>
 					</Col>
