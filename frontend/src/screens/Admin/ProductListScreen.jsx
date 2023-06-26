@@ -7,7 +7,12 @@ import { toast } from 'react-toastify'
 import { useFetchProductsQuery, useCreateProductMutation } from '../../store'
 
 const ProductListScreen = () => {
-	const { data: products, isLoading, error } = useFetchProductsQuery()
+	const {
+		data: products,
+		refetch,
+		isLoading,
+		error,
+	} = useFetchProductsQuery()
 
 	const [createProduct, { isLoading: loadingCreate }] =
 		useCreateProductMutation()
@@ -16,6 +21,7 @@ const ProductListScreen = () => {
 		if (window.confirm('Are you sure you want to create a new product?')) {
 			try {
 				await createProduct()
+				refetch()
 				toast.success('Product created successfully')
 			} catch (err) {
 				toast.error(err?.data?.message || err.error)

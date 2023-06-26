@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BASE_URL, PRODUCTS_URL } from '../constants'
+import { BASE_URL, PRODUCTS_URL, UPLOAD_URL } from '../constants'
 
 const productsApi = createApi({
 	reducerPath: 'products',
@@ -43,6 +43,15 @@ const productsApi = createApi({
 					}
 				},
 			}),
+			uploadProductImage: builder.mutation({
+				query: (data) => {
+					return {
+						url: `${UPLOAD_URL}`,
+						method: 'POST',
+						body: data,
+					}
+				},
+			}),
 		}
 	},
 })
@@ -52,5 +61,6 @@ export const {
 	useFetchProductDetailsQuery,
 	useCreateProductMutation,
 	useUpdateProductMutation,
+	useUploadProductImageMutation,
 } = productsApi
 export { productsApi }

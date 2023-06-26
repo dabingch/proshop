@@ -44,6 +44,7 @@ export {
 	useFetchProductDetailsQuery,
 	useCreateProductMutation,
 	useUpdateProductMutation,
+	useUploadProductImageMutation,
 } from './apis/productsApi'
 export {
 	useRegisterMutation,

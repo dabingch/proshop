@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import {
 	useFetchProductDetailsQuery,
 	useUpdateProductMutation,
+	useUploadProductImageMutation,
 } from '../../store'
 
 const ProductEditScreen = () => {
@@ -26,11 +27,15 @@ const ProductEditScreen = () => {
 	const {
 		data: product,
 		isLoading,
+		refetch,
 		error,
 	} = useFetchProductDetailsQuery(productId)
 
 	const [updateProduct, { isLoading: loadingUpdate }] =
 		useUpdateProductMutation()
+
+	const [uploadProductImage, { isLoading: loadingUpload }] =
+		useUploadProductImageMutation()
 
 	useEffect(() => {
 		if (product) {
@@ -60,9 +65,24 @@ const ProductEditScreen = () => {
 
 		try {
 			await updateProduct(updatedProduct)
+			refetch()
 			toast.success('Product updated successfully')
 			navigate('/admin/productlist')
 		} catch (err) {
+			toast.error(err?.data?.message || err.error)
+		}
+	}
+
+	const handleUploadFile = async (e) => {
+		const formData = new FormData()
+		formData.append('image', e.target.files[0])
+
+		try {
+			const res = await uploadProductImage(formData).unwrap()
+			toast.success(res.message)
+			setImage(res.image)
+		} catch (err) {
+			console.log(err?.data?.message || err.error)
 			toast.error(err?.data?.message || err.error)
 		}
 	}
@@ -100,6 +120,22 @@ const ProductEditScreen = () => {
 								value={price}
 								onChange={(e) => setPrice(e.target.value)}
 							></Form.Control>
+						</Form.Group>
+
+						<Form.Group controlId='image' className='my-2'>
+							<Form.Label>Image</Form.Label>
+							<Form.Control
+								type='text'
+								placeholder='Enter image url'
+								value={image}
+								onChange={(e) => setImage(e.target.value)}
+							></Form.Control>
+							<Form.Control
+								type='file'
+								label='Choose file'
+								onChange={handleUploadFile}
+							></Form.Control>
+							{loadingUpload && <Loader />}
 						</Form.Group>
 
 						<Form.Group controlId='brand' className='my-2'>

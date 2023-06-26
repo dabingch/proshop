@@ -5,7 +5,8 @@
 -   Use http only in the cookie and store token in it
 -   Hash password in User schema
 -   Config middleware in the backend for protecting route and error handling
--   args in mongoose.model
+-   args, methods, pre/post in mongoose.model
+-   multer for image upload
 
 ### Frontend
 
