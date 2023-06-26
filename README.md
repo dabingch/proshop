@@ -15,6 +15,7 @@
 -   React-bootstrap
 -   Redirect
 -   Private route (shipping -> login)
+-   Replace in Navigation
 
 ### Remaining
 
