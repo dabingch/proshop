@@ -23,6 +23,7 @@ import OrderListScreen from './screens/Admin/OrderListScreen'
 import ProductListScreen from './screens/Admin/ProductListScreen'
 import ProductEditScreen from './screens/Admin/ProductEditScreen'
 import UserListScreen from './screens/Admin/UserListScreen'
+import UserEditScreen from './screens/Admin/UserEditScreen'
 import ErrorScreen from './screens/ErrorScreen'
 
 const router = createBrowserRouter([
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
 					{
 						path: 'admin/userlist',
 						element: <UserListScreen />,
+					},
+					{
+						path: 'admin/user/:id/edit',
+						element: <UserEditScreen />,
 					},
 				],
 			},

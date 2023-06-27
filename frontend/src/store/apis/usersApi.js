@@ -60,6 +60,25 @@ const usersApi = createApi({
 					}
 				},
 			}),
+			getUserDetails: builder.query({
+				query: (userId) => {
+					return {
+						url: `${USERS_URL}/${userId}`,
+						method: 'GET',
+					}
+				},
+				keepUnusedDataFor: 5,
+			}),
+			updateUser: builder.mutation({
+				invalidatesTags: ['User'],
+				query: (data) => {
+					return {
+						url: `${USERS_URL}/${data.userId}`,
+						method: 'PUT',
+						body: data,
+					}
+				},
+			}),
 		}
 	},
 })
@@ -71,5 +90,7 @@ export const {
 	useProfileMutation,
 	useGetUsersQuery,
 	useDeleteUserMutation,
+	useGetUserDetailsQuery,
+	useUpdateUserMutation,
 } = usersApi
 export { usersApi }
