@@ -52,6 +52,8 @@ export {
 	useLoginMutation,
 	useLogoutMutation,
 	useProfileMutation,
+	useGetUsersQuery,
+	useDeleteUserMutation,
 } from './apis/usersApi'
 export {
 	useCreateOrderMutation,
