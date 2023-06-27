@@ -1,14 +1,30 @@
 import { Table, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { FaEdit, FaTrash } from 'react-icons/fa'
+import { toast } from 'react-toastify'
+import Loader from './Loader'
+import { useDeleteProductMutation } from '../store'
 
-const ProductList = ({ products }) => {
-	const handleDelete = async (id) => {
-		console.log(id)
+const ProductList = ({ products, refetch }) => {
+	const [deleteProduct, { isLoading: loadingDelete }] =
+		useDeleteProductMutation()
+
+	const handleDeleteProduct = async (productId) => {
+		if (window.confirm('Are you sure you want to delete this product?')) {
+			try {
+				await deleteProduct(productId)
+				refetch()
+				toast.success('Product deleted successfully')
+			} catch (err) {
+				toast.error(err?.data?.message || err.error)
+			}
+		}
 	}
 
 	return (
 		<>
+			{loadingDelete && <Loader />}
+
 			<Table striped hover responsive className='table-sm'>
 				<thead>
 					<tr>
@@ -42,7 +58,10 @@ const ProductList = ({ products }) => {
 								<Button
 									className='btn-sm'
 									variant='danger'
-									onClick={() => handleDelete(product._id)}
+									disabled={loadingDelete}
+									onClick={() =>
+										handleDeleteProduct(product._id)
+									}
 								>
 									<FaTrash style={{ color: '#fff' }} />
 								</Button>

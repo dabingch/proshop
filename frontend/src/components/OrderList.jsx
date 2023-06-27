@@ -34,7 +34,6 @@ const OrderList = ({ orders }) => {
 
 	return (
 		<>
-			<h1>Orders</h1>
 			<Table striped hover responsive className='table-sm'>
 				<thead>
 					<tr>

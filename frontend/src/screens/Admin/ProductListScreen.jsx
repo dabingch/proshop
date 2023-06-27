@@ -53,7 +53,7 @@ const ProductListScreen = () => {
 			) : error ? (
 				<Message variant='danger'>{error.message}</Message>
 			) : (
-				<ProductList products={products} />
+				<ProductList products={products} refetch={refetch} />
 			)}
 		</>
 	)
