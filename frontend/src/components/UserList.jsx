@@ -9,6 +9,13 @@ const OrderList = ({ users, refetch }) => {
 	const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation()
 
 	const handleDeleteUser = async (id) => {
+		const user = users.find((user) => user._id === id)
+
+		if (user.isAdmin) {
+			toast.error('You cannot delete an admin user')
+			return
+		}
+
 		if (window.confirm('Are you sure you want to delete this user?')) {
 			try {
 				await deleteUser(id)
