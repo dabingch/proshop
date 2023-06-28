@@ -54,10 +54,15 @@ const ProductListScreen = () => {
 			) : error ? (
 				<Message variant='danger'>{error.message}</Message>
 			) : (
-				<ProductList products={data.products} refetch={refetch} />
+				<>
+					<ProductList products={data.products} refetch={refetch} />
+					<Paginate
+						pages={data.pages}
+						page={data.page}
+						isAdmin={true}
+					/>
+				</>
 			)}
-
-			<Paginate pages={data.pages} page={data.page} isAdmin={true} />
 		</>
 	)
 }
