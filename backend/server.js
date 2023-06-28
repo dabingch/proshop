@@ -28,9 +28,13 @@ app.use('/api/uploads', uploadRoutes)
 const __dirname = path.resolve() // Set __dirname to current directory
 
 if (process.env.NODE_ENV === 'production') {
-	// set static folder
-	app.use('/uploads', express.static('/var/data/uploads'))
-	app.use(express.static(path.join(__dirname, '../frontend/build')))
+	// set static folder for uploading files
+	app.use(
+		'/uploads',
+		express.static(path.resolve(__dirname, '../var', 'data', 'uploads'))
+	)
+	// set static folder for other static files
+	app.use(express.static(path.resolve(__dirname, '../frontend', 'build')))
 
 	// any route that is not api will be redirected to index.html
 	app.get('*', (req, res) => {
