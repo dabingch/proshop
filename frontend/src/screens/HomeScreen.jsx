@@ -5,6 +5,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
+import Meta from '../components/Meta'
 import { useFetchProductsQuery } from '../store'
 
 const HomeScreen = () => {
@@ -25,6 +26,7 @@ const HomeScreen = () => {
 	} else {
 		return (
 			<>
+				<Meta />
 				{!keyword ? (
 					<ProductCarousel />
 				) : (
