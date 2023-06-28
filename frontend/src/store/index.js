@@ -47,6 +47,7 @@ export {
 	useUploadProductImageMutation,
 	useDeleteProductMutation,
 	useCreateProductReviewMutation,
+	useGetTopProductsQuery,
 } from './apis/productsApi'
 export {
 	useRegisterMutation,

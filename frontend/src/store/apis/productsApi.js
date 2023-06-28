@@ -72,6 +72,15 @@ const productsApi = createApi({
 					}
 				},
 			}),
+			getTopProducts: builder.query({
+				query: () => {
+					return {
+						url: `${PRODUCTS_URL}/top`,
+						method: 'GET',
+					}
+				},
+				keepUnusedDataFor: 5,
+			}),
 		}
 	},
 })
@@ -84,5 +93,6 @@ export const {
 	useUploadProductImageMutation,
 	useDeleteProductMutation,
 	useCreateProductReviewMutation,
+	useGetTopProductsQuery,
 } = productsApi
 export { productsApi }

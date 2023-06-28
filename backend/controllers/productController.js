@@ -128,6 +128,17 @@ const createProductReview = asyncHandler(async (req, res) => {
 	res.status(201).json({ message: 'Review added' })
 })
 
+const getTopProducts = asyncHandler(async (req, res) => {
+	const products = await Product.find({}).sort({ rating: -1 }).limit(3)
+
+	if (!products.length) {
+		res.status(404)
+		throw new Error('No products found')
+	}
+
+	res.status(200).json(products)
+})
+
 export {
 	getProducts,
 	getProductById,
@@ -135,4 +146,5 @@ export {
 	updateProduct,
 	deleteProduct,
 	createProductReview,
+	getTopProducts,
 }
