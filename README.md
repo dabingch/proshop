@@ -7,6 +7,7 @@
 -   Config middleware in the backend for protecting route and error handling
 -   args, methods, pre/post in mongoose.model
 -   multer for image upload
+-   production setup
 
 ### Frontend
 
