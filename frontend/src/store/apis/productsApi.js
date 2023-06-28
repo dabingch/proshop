@@ -61,6 +61,16 @@ const productsApi = createApi({
 					}
 				},
 			}),
+			createProductReview: builder.mutation({
+				invalidatesTags: ['Product'],
+				query: (data) => {
+					return {
+						url: `${PRODUCTS_URL}/${data.productId}/reviews`,
+						method: 'POST',
+						body: data,
+					}
+				},
+			}),
 		}
 	},
 })
@@ -72,5 +82,6 @@ export const {
 	useUpdateProductMutation,
 	useUploadProductImageMutation,
 	useDeleteProductMutation,
+	useCreateProductReviewMutation,
 } = productsApi
 export { productsApi }
