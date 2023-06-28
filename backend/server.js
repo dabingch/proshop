@@ -26,13 +26,14 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/uploads', uploadRoutes)
 
 const __dirname = path.resolve() // Set __dirname to current directory
+app.use('/uploads', express.static(path.join(__dirname, '/uploads'))) // Set /uploads to be a static folder
 
 if (process.env.NODE_ENV === 'production') {
-	// set static folder for uploading files
-	app.use(
-		'/uploads',
-		express.static(path.resolve(__dirname, '../var', 'data', 'uploads'))
-	)
+	// set static folder for uploading files in production
+	// app.use(
+	// 	'/uploads',
+	// 	express.static(path.resolve(__dirname, '../var', 'data', 'uploads'))
+	// )
 	// set static folder for other static files
 	app.use(express.static(path.resolve(__dirname, '../frontend', 'build')))
 
@@ -43,7 +44,6 @@ if (process.env.NODE_ENV === 'production') {
 		)
 	})
 } else {
-	app.use('/uploads', express.static(path.join(__dirname, '/uploads'))) // Set /uploads to be a static folder
 	app.get('/', (req, res) => {
 		res.send('API is running...')
 	})
