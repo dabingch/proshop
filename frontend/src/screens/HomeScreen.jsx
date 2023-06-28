@@ -1,5 +1,5 @@
 import { Row, Col } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -7,8 +7,11 @@ import Paginate from '../components/Paginate'
 import { useFetchProductsQuery } from '../store'
 
 const HomeScreen = () => {
-	const { pageNumber } = useParams()
-	const { data, isLoading, error } = useFetchProductsQuery({ pageNumber })
+	const { pageNumber, keyword } = useParams()
+	const { data, isLoading, error } = useFetchProductsQuery({
+		keyword,
+		pageNumber,
+	})
 
 	if (isLoading) {
 		return <Loader />
@@ -21,6 +24,11 @@ const HomeScreen = () => {
 	} else {
 		return (
 			<>
+				{keyword && (
+					<Link to='/' className='btn btn-light mb-4'>
+						Go Back
+					</Link>
+				)}
 				<h1>Latest Products</h1>
 				<Row>
 					{data.products.map((product) => {
@@ -31,7 +39,11 @@ const HomeScreen = () => {
 						)
 					})}
 				</Row>
-				<Paginate pages={data.pages} page={data.page} />
+				<Paginate
+					pages={data.pages}
+					page={data.page}
+					keyword={keyword ? keyword : ''}
+				/>
 			</>
 		)
 	}

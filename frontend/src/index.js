@@ -33,7 +33,12 @@ const router = createBrowserRouter([
 		errorElement: <ErrorScreen />,
 		children: [
 			{ index: true, element: <HomeScreen /> },
+			{ path: '/search/:keyword', element: <HomeScreen /> },
 			{ path: '/page/:pageNumber', element: <HomeScreen /> },
+			{
+				path: '/search/:keyword/page/:pageNumber',
+				element: <HomeScreen />,
+			},
 			{ path: '/product/:id', element: <ProductScreen /> },
 			{
 				path: '/cart',
