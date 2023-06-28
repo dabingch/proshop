@@ -33,6 +33,7 @@ const router = createBrowserRouter([
 		errorElement: <ErrorScreen />,
 		children: [
 			{ index: true, element: <HomeScreen /> },
+			{ path: '/page/:pageNumber', element: <HomeScreen /> },
 			{ path: '/product/:id', element: <ProductScreen /> },
 			{
 				path: '/cart',
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
 					},
 					{
 						path: 'admin/productlist',
+						element: <ProductListScreen />,
+					},
+					{
+						path: 'admin/productlist/:pageNumber',
 						element: <ProductListScreen />,
 					},
 					{

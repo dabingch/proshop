@@ -1,18 +1,19 @@
+import { useParams } from 'react-router-dom'
 import { Button, Row, Col } from 'react-bootstrap'
 import { FaEdit } from 'react-icons/fa'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import ProductList from '../../components/ProductList'
+import Paginate from '../../components/Paginate'
 import { toast } from 'react-toastify'
 import { useFetchProductsQuery, useCreateProductMutation } from '../../store'
 
 const ProductListScreen = () => {
-	const {
-		data: products,
-		refetch,
-		isLoading,
-		error,
-	} = useFetchProductsQuery()
+	const { pageNumber } = useParams()
+
+	const { data, refetch, isLoading, error } = useFetchProductsQuery({
+		pageNumber,
+	})
 
 	const [createProduct, { isLoading: loadingCreate }] =
 		useCreateProductMutation()
@@ -53,8 +54,10 @@ const ProductListScreen = () => {
 			) : error ? (
 				<Message variant='danger'>{error.message}</Message>
 			) : (
-				<ProductList products={products} refetch={refetch} />
+				<ProductList products={data.products} refetch={refetch} />
 			)}
+
+			<Paginate pages={data.pages} page={data.page} isAdmin={true} />
 		</>
 	)
 }

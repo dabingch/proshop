@@ -8,9 +8,10 @@ const productsApi = createApi({
 		return {
 			fetchProducts: builder.query({
 				providesTags: ['Product'],
-				query: () => {
+				query: ({ pageNumber }) => {
 					return {
 						url: PRODUCTS_URL,
+						params: { pageNumber },
 						method: 'GET',
 					}
 				},
