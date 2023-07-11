@@ -1,5 +1,14 @@
 ## Note
 
+[Click here to access the website](https://proshop-z728.onrender.com)
+
+### Test Account
+
+You can use these account to login to test the functions
+
+-   Account: admin@email.com
+-   Password: 123456
+
 ### Backend
 
 -   Use http only in the cookie and store token in it
