@@ -1,3 +1,8 @@
+## Authentication
+
+- Account: admin
+- Password: 123456
+
 ## Note
 
 ### Backend
