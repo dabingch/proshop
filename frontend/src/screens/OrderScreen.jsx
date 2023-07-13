@@ -1,31 +1,31 @@
-import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { toast } from 'react-toastify'
+import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { toast } from 'react-toastify';
 import {
 	useGetOrderDetailsQuery,
 	usePayOrderMutation,
 	useDeliverOrderMutation,
-} from '../store'
+} from '../store';
 
 const OrderScreen = () => {
-	const { id: orderId } = useParams()
+	const { id: orderId } = useParams();
 
 	const {
 		data: order,
 		refetch,
 		isLoading,
 		error,
-	} = useGetOrderDetailsQuery(orderId)
+	} = useGetOrderDetailsQuery(orderId);
 
-	const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation()
+	const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
 
 	const [deliverOrder, { isLoading: loadingDeliver }] =
-		useDeliverOrderMutation()
+		useDeliverOrderMutation();
 
-	const { userInfo } = useSelector((state) => state.auth)
+	const { userInfo } = useSelector((state) => state.auth);
 
 	// * Just a mock payment handler
 	const handlePayOrder = async () => {
@@ -36,30 +36,30 @@ const OrderScreen = () => {
 			payer: {
 				email_address: userInfo.email,
 			},
-		}
+		};
 		try {
-			await payOrder({ orderId, details })
-			refetch()
-			toast.success('Payment successful')
+			await payOrder({ orderId, details });
+			refetch();
+			toast.success('Payment successful');
 		} catch (err) {
-			toast.error(err?.data?.message || err.error)
+			toast.error(err?.data?.message || err.error);
 		}
-	}
+	};
 
 	const handleDeliver = async () => {
 		try {
-			await deliverOrder(orderId)
-			refetch()
-			toast.success('Order delivered')
+			await deliverOrder(orderId);
+			refetch();
+			toast.success('Order delivered');
 		} catch (err) {
-			toast.error(err?.data?.message || err.error)
+			toast.error(err?.data?.message || err.error);
 		}
-	}
+	};
 
 	if (isLoading) {
-		return <Loader />
+		return <Loader />;
 	} else if (error) {
-		return <Message variant='danger'>{error.message}</Message>
+		return <Message variant='danger'>{error.message}</Message>;
 	} else {
 		return (
 			<>
@@ -139,7 +139,10 @@ const OrderScreen = () => {
 													<Col md={4}>
 														{item.qty} x $
 														{item.price} = $
-														{item.qty * item.price}
+														{(
+															item.qty *
+															item.price
+														).toFixed(2)}
 													</Col>
 												</Row>
 											</ListGroup.Item>
@@ -215,8 +218,8 @@ const OrderScreen = () => {
 					</Col>
 				</Row>
 			</>
-		)
+		);
 	}
-}
+};
 
-export default OrderScreen
+export default OrderScreen;
