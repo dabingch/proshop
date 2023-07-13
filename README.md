@@ -1,3 +1,8 @@
+## Authentication
+
+- Account: admin
+- Password: 123456
+
 ## Note
 
 [Click here to access the website](https://proshop-z728.onrender.com)
