@@ -1,8 +1,3 @@
-## Authentication
-
--   Account: admin
--   Password: 123456
-
 ## Note
 
 [Click here to access the website](https://proshop-l9q8.onrender.com/)
